@@ -1,0 +1,15 @@
+Index: network_tcp.c
+===================================================================
+--- network_tcp.c	(revision 10935)
++++ network_tcp.c	(working copy)
+@@ -352,7 +352,9 @@
+     hints.ai_socktype = SOCK_STREAM;
+     hints.ai_flags = AI_PASSIVE;
+     hints.ai_protocol = IPPROTO_TCP;
+-    if(UA_getaddrinfo(NULL, portno, &hints, &res) != 0)
++//    if(UA_getaddrinfo(NULL, portno, &hints, &res) != 0)
++    //###NG: if(UA_getaddrinfo(NULL, portno, &hints, &res) != 0)
++	if (UA_getaddrinfo("127.0.0.1", portno, &hints, &res) != 0)	////###NG: only localhost
+         return UA_STATUSCODE_BADINTERNALERROR;
+ 
+     /* There might be serveral addrinfos (for different network cards,

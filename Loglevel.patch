@@ -1,0 +1,31 @@
+Index: CMakeLists.txt
+===================================================================
+--- CMakeLists.txt	(revision 11353)
++++ CMakeLists.txt	(working copy)
+@@ -119,7 +119,8 @@
+ endforeach(arch_ ${architectures})
+ 
+ # Options
+-set(UA_LOGLEVEL 300 CACHE STRING "Level at which logs shall be reported")
++set(UA_LOGLEVEL 400 CACHE STRING "Level at which logs shall be reported in release mode")
++set(UA_LOGLEVEL_DEBUG 300 CACHE STRING "Level at which logs shall be reported in debug mode")
+ option(UA_ENABLE_HISTORIZING "Enable server and client to provide historical access." OFF)
+ option(UA_ENABLE_EXPERIMENTAL_HISTORIZING "Enable client experimental historical access features." OFF)
+ option(UA_ENABLE_METHODCALLS "Enable the Method service set" ON)
+Index: include/open62541/config.h.in
+===================================================================
+--- include/open62541/config.h.in	(revision 11353)
++++ include/open62541/config.h.in	(working copy)
+@@ -19,7 +19,12 @@
+  * ---------------
+  * Changing the feature options has no effect on a pre-compiled library. */
+ 
++#ifdef _DEBUG
++#define UA_LOGLEVEL ${UA_LOGLEVEL_DEBUG}
++#else
+ #define UA_LOGLEVEL ${UA_LOGLEVEL}
++#endif
++
+ #ifndef UA_ENABLE_AMALGAMATION
+ #cmakedefine UA_ENABLE_AMALGAMATION
+ #endif

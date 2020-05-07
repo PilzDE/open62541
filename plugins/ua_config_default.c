@@ -108,7 +108,7 @@ createEndpoint(UA_ServerConfig *conf, UA_EndpointDescription *endpoint,
     return UA_STATUSCODE_GOOD;
 }
 
-static const size_t usernamePasswordsSize = 2;
+static const size_t usernamePasswordsSize = 0;
 static UA_UsernamePasswordLogin usernamePasswords[2] = {
     {UA_STRING_STATIC("user1"), UA_STRING_STATIC("password")},
     {UA_STRING_STATIC("user2"), UA_STRING_STATIC("password1")}};

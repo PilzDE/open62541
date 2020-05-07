@@ -272,7 +272,7 @@ certificateVerification_verify(void *verificationContext,
     mbedtls_x509_crt *parentCert = NULL;
 
     /* Temporary Object to identify the parent CA when there is intermediate CA */
-    mbedtls_x509_crt *parentCert_2 = NULL;
+    mbedtls_x509_crt *parentCert_2 = 0;
 
     /* Flag value to identify if the issuer certificate is found */
     int issuerKnown = 0;

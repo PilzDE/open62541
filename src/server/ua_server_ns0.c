@@ -613,6 +613,13 @@ addVariableNode(UA_Server *server, char* name, UA_UInt32 variableid,
     attr.displayName = UA_LOCALIZEDTEXT("", name);
     attr.dataType = UA_NODEID_NUMERIC(0, dataType);
     attr.valueRank = valueRank;
+    if (valueRank == 1)
+    {
+        attr.arrayDimensionsSize = 1;
+        attr.arrayDimensions = (UA_UInt32 *)UA_Array_new(1, &UA_TYPES[UA_TYPES_UINT32]);
+        attr.arrayDimensions[0] = 0;
+        UA_Variant_setArray(&attr.value, NULL, (UA_Int32)0, &UA_TYPES[UA_TYPES_STRING]);
+    }
     attr.accessLevel = UA_ACCESSLEVELMASK_READ;
     return UA_Server_addVariableNode(server, UA_NODEID_NUMERIC(0, variableid),
                                      UA_NODEID_NUMERIC(0, parentid), UA_NODEID_NUMERIC(0, referenceid),
